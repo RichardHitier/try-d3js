@@ -24,8 +24,9 @@
 <body>
 
   <select id="num-circles">
-    <option value="">--Please choose an option--</option>
+    <option value="">--Please choose max circles--</option>
   </select>
+  <div id="chart_buttons"></div>
 
   <!-- Create a div where the circles will take place -->
   <svg id="chart_circles"></svg>
@@ -37,7 +38,8 @@
     let width = 400;
     let height = 400;
 
-    draw_rect(5)
+
+    // draw_rect(5)
 
     // fill in the select dropdown menu
     let max_circles = Array.from(Array(15).keys())
@@ -49,9 +51,34 @@
         .text(d => d)
         .on("click", function (e) {
           let num_circles = e.target.index
-          draw_rect(num_circles)
-          draw_circles(num_circles)
+          draw_buttons(num_circles)
+          // draw_rect(num_circles)
+          // draw_circles(num_circles)
         });
+
+    function get_data(n) {
+      // Build the integer list
+      n = +n
+      let theData = Array.from(Array(n + 1).keys())
+      theData.shift()
+      return theData
+    }
+
+    function draw_buttons(n) {
+      d3.select("#chart_buttons").selectAll("button").remove()
+      let theData = get_data(n)
+      d3.select("#chart_buttons").selectAll('button')
+          .data(theData)
+          .enter()
+          .append('button')
+          .attr('id', d => "btn_" + d)
+          .text(d => d)
+          .on("click", function (e) {
+            let num_circles = e.target.textContent
+            draw_rect(num_circles)
+            draw_circles(num_circles)
+          });
+    }
 
     function draw_rect(n) {
       // width is biggest circle position plus margins
@@ -75,13 +102,10 @@
     }
 
     function draw_circles(n) {
-
       // Remove previous drawings if any
       d3.select('#chart_circles').selectAll('circle').remove()
       d3.select('#chart_circles').selectAll('text').remove()
-      // Build the integer list
-      let theData = Array.from(Array(n + 1).keys())
-      theData.shift()
+      let theData = get_data(n)
       // Add the circles from the data tabl
       d3.select('#chart_circles').selectAll('circle')
           .data(theData)
@@ -102,7 +126,6 @@
           .attr('dy', '.30em')
           .text(d => d);
 
-      console.log(height)
     }
 
     // Function to return the position of circle center from its level
@@ -111,7 +134,7 @@
       if (n == 0) {
         x = 0
       } else {
-        x = cx(n - 1) + 0 + 10 * (2 * n - 1)
+        x = cx(n - 1) + 10 + 10 * (2 * n - 1)
       }
       return x
     }
