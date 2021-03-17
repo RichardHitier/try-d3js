@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+
+    select {
+      display: block;
+    }
+
+    svg {
+      background-color: #f2f2f2;
+      border: 1pt solid black;
+    }
+
+    circle {
+      /*fill: bisque;*/
+      stroke: black;
+      stroke-width: 1;
+    }
+  </style>
+
+</head>
+<body>
+
+  <select id="num-circles">
+    <option value="">--Please choose an option--</option>
+  </select>
+
+  <!-- Create a div where the circles will take place -->
+  <svg id="chart_circles"></svg>
+
+  <!-- Load d3.js -->
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+
+  <script>
+    let width = 400;
+    let height = 400;
+
+    draw_rect(5)
+
+    // fill in the select dropdown menu
+    let max_circles = Array.from(Array(15).keys())
+    d3.select('#num-circles').selectAll("option")
+        .data(max_circles)
+        .enter()
+        .append("option")
+        .attr("value", d => d)
+        .text(d => d)
+        .on("click", function (e) {
+          let num_circles = e.target.index
+          draw_rect(num_circles)
+          draw_circles(num_circles)
+        });
+
+    function draw_rect(n) {
+      // width is biggest circle position plus margins
+      // height is biggest circle diameter plus margins
+      var rect_margin_x = 50
+      var rect_margin_y = 50
+      var last_x = cx(n)
+      var last_r = cr(n)
+      width = rect_margin_x * 2 + last_x + last_r
+      height = rect_margin_y * 2 + last_r * 2
+
+      // Set the svg dimensions
+      d3.select('#chart_circles')
+          .attr('width', width)
+          .attr('height', height)
+    }
+
+    // Return circle radius by level
+    function cr(n) {
+      return 10 * n
+    }
+
+    function draw_circles(n) {
+
+      // Remove previous drawings if any
+      d3.select('#chart_circles').selectAll('circle').remove()
+      d3.select('#chart_circles').selectAll('text').remove()
+      // Build the integer list
+      let theData = Array.from(Array(n + 1).keys())
+      theData.shift()
+      // Add the circles from the data tabl
+      d3.select('#chart_circles').selectAll('circle')
+          .data(theData)
+          .enter()
+          .append('circle')
+          .attr('cy', height / 2)
+          .attr('cx', d => cx(d))
+          .attr('r', d => cr(d))
+          .attr('fill', 'bisque');
+
+      d3.select('#chart_circles').selectAll('text')
+          .data(theData)
+          .enter()
+          .append('text')
+          .attr('y', height / 2)
+          .attr('x', d => cx(d))
+          .attr('dx', '-.30em')
+          .attr('dy', '.30em')
+          .text(d => d);
+
+      console.log(height)
+    }
+
+    // Function to return the position of circle center from its level
+    function cx(n) {
+      let x = 0
+      if (n == 0) {
+        x = 0
+      } else {
+        x = cx(n - 1) + 0 + 10 * (2 * n - 1)
+      }
+      return x
+    }
+
+  </script>
+</body>
