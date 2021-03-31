@@ -14,14 +14,26 @@
       stroke-width: 1pt;
     }
 
-    rect.velo{
-    stroke: darkblue;
+    rect.velo {
+      stroke: darkblue;
     }
 
-    .tooltip{
+    rect.rando {
+      stroke: brown;
+    }
+
+    #tooltip {
+      padding: 0.5em;
       position: absolute;
       border: solid black 1pt;
+    }
+
+    #tooltip.velo {
       background-color: lightsteelblue;
+    }
+
+    #tooltip.rando {
+      background-color: lightpink;
     }
   </style>
 
@@ -41,7 +53,7 @@
         height = 400 - margin.top - margin.bottom;
 
     const x = d3.scaleTime()
-        .range([5, 10])
+        .range([5, 15])
 
     const y = d3.scaleLinear()
         .range([height, 0])
@@ -56,7 +68,7 @@
 
     // var	parseDate = d3.time.format("%Y-%m").parse;
     const tooltip = d3.select("body").append("div")
-        .attr("class", "tooltip")
+        .attr("id", "tooltip")
         .style("opacity", 0);
 
     d3.csv("./cyclo.csv").then(data => {
@@ -86,23 +98,29 @@
           .enter().append("rect")
           .attr("class", d => d.mode)
           .attr("x", d => x(d.date))
-          .attr("width", 5)
+          .attr("width", 7)
           .attr("y", d => y(d.distance))
           .attr("height", d => height - y(d.distance))
           .on("mouseover", function (e, d) {
+            d3.select(this).style("fill", '#fff')
+                .attr('width', 8);
+            tooltip.attr("class", d.mode);
             tooltip.transition()
                 .duration(200)
                 .style("opacity", .9);
-            tooltip.html("distance : " + d.distance+" km<br>"+"durée: " + d.temps)
-                .style("left", (e.pageX + 10) + "px")
-                .style("top", (e.pageY - 50) + "px");
+            tooltip.html("<b>" + d.nom + "</b><br>distance : " + d.distance + " km<br>durée: " + d.temps)
+                .style("left", (e.pageX + 0) + "px")
+                .style("top", margin.top + "px");
+            // .style("top", (e.pageY - 200) + "px");
           })
-          .on("mousemove", function (e, d) {
-            tooltip
-                .style("left", (e.pageX + 10) + "px")
-                .style("top", (e.pageY - 50) + "px");
-          })
+          // .on("mousemove", function (e, d) {
+          //   tooltip
+          //       .style("left", (e.pageX + 0) + "px")
+          //       .style("top", (e.pageY - 200) + "px");
+          // })
           .on("mouseout", function (d) {
+            d3.select(this).style("fill", '#f2f2f2')
+                .attr('width', 7);
             tooltip.transition()
                 .duration(500)
                 .style("opacity", 0);
