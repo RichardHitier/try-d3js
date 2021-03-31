@@ -9,10 +9,19 @@
       border: 1pt solid black;
     }
 
-    .bar {
+    rect {
       fill: #f2f2f2;
       stroke-width: 1pt;
-      stroke: darkblue;
+    }
+
+    rect.velo{
+    stroke: darkblue;
+    }
+
+    .tooltip{
+      position: absolute;
+      border: solid black 1pt;
+      background-color: lightsteelblue;
     }
   </style>
 
@@ -28,7 +37,7 @@
 
   <script>
     var margin = {'top': 40, 'right': 10, 'bottom': 140, 'left': 120},
-        width = 1500 - margin.left - margin.right,
+        width = 1800 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
     const x = d3.scaleTime()
@@ -46,6 +55,9 @@
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
     // var	parseDate = d3.time.format("%Y-%m").parse;
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
     d3.csv("./cyclo.csv").then(data => {
       console.log(data);
@@ -72,11 +84,29 @@
       svg.selectAll(".bar")
           .data(data)
           .enter().append("rect")
-          .attr("class", "bar")
+          .attr("class", d => d.mode)
           .attr("x", d => x(d.date))
-          .attr("width", 1)
+          .attr("width", 5)
           .attr("y", d => y(d.distance))
           .attr("height", d => height - y(d.distance))
+          .on("mouseover", function (e, d) {
+            tooltip.transition()
+                .duration(200)
+                .style("opacity", .9);
+            tooltip.html("distance : " + d.distance+" km<br>"+"durée: " + d.temps)
+                .style("left", (e.pageX + 10) + "px")
+                .style("top", (e.pageY - 50) + "px");
+          })
+          .on("mousemove", function (e, d) {
+            tooltip
+                .style("left", (e.pageX + 10) + "px")
+                .style("top", (e.pageY - 50) + "px");
+          })
+          .on("mouseout", function (d) {
+            tooltip.transition()
+                .duration(500)
+                .style("opacity", 0);
+          });
     });
 
 
