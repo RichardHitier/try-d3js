@@ -14,6 +14,11 @@
       stroke-width: 1pt;
     }
 
+    rect.hover {
+      stroke: black;
+      fill: white;
+    }
+
     rect.velo {
       stroke: darkblue;
     }
@@ -102,8 +107,7 @@
           .attr("y", d => y(d.distance))
           .attr("height", d => height - y(d.distance))
           .on("mouseover", function (e, d) {
-            d3.select(this).style("fill", '#fff')
-                .attr('width', 8);
+            d3.select(this).attr("class", "hover")
             tooltip.attr("class", d.mode);
             tooltip.transition()
                 .duration(200)
@@ -119,8 +123,7 @@
           //       .style("top", (e.pageY - 200) + "px");
           // })
           .on("mouseout", function (d) {
-            d3.select(this).style("fill", '#f2f2f2')
-                .attr('width', 7);
+            d3.select(this).attr("class", d=>d.mode);
             tooltip.transition()
                 .duration(500)
                 .style("opacity", 0);
