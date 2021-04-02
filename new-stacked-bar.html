@@ -94,15 +94,19 @@
 
       // Sur l'axe horizontal, on filtre les dates afficher
       const xAxis = d3.axisBottom(x)
-          // .tickValues(x.domain().filter(d => (d.includes("06/0") || d.includes("21/0"))));
+      // .tickValues(x.domain().filter(d => (d.includes("06/0") || d.includes("21/0"))));
 
       const yAxis = d3.axisLeft(y)
+
       svg.append("g")
           .attr("class", "x axis")
           .attr("transform", "translate(0," + height + ")")
           .call(xAxis)
           .selectAll("text")
-          .style("text-anchor", "middle");
+          .style("text-anchor", "end")
+          .attr("dx", "-.9em")
+          .attr("dy", ".15em")
+          .attr("transform", "rotate(-65)");
 
       svg.append("g")
           .attr("class", "y axis")
@@ -114,6 +118,13 @@
           .attr("dy", "0.71em")
           .style("text-anchor", "end")
           .text("rate");
+
+      svg.append("text")
+          .attr("text-anchor", "end")
+          .attr("transform", "rotate(-90)")
+          .attr("y", -margin.left + 40)
+          .attr("x", -margin.top - 70)
+          .text("Charge (ETP)")
 
 
       // console.log(y(0))
