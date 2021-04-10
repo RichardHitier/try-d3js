@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+
+    svg {
+      background-color: #f2f2f2;
+      border: 1pt solid black;
+    }
+  </style>
+
+</head>
+<body id="body">
+
+  <!-- Create a div where the circles will take place -->
+  <div id="chart_grouped_bar"></div>
+
+  <!-- Load d3.js -->
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script>
+
+    window.addEventListener("resize", function () {
+      size=document.getElementById("chart_grouped_bar").offsetWidth
+      console.log('resize ! '+size);
+    });
+    var margin = {top: 30, right: 30, bottom: 130, left: 90}
+    var width = document.getElementById("chart_grouped_bar").offsetWidth * 0.95 - margin.left - margin.right,
+        height = 600 - margin.top - margin.bottom;
+    var height = 600 - margin.top - margin.bottom;
+
+
+    var color = d3.scaleOrdinal()
+        .range([
+          "#800000",
+          "#FFFF00",
+          "#808000",
+          "#00FF00",
+          "#008000",
+          "#00FFFF",
+          "#008080",
+          "#0000FF",
+          "#000080",
+          "#FF00FF",
+          "#800080",
+        ]);
+
+    var svg = d3.select("#chart_grouped_bar")
+        .append('svg')
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append('g')
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+    svg.append('rect')
+        .attr('x', 0)
+        .attr('y', 0)
+        .attr('width', width)
+        .attr('height', height)
+        .attr('stroke', 'black')
+        .attr('fill', '#f2f2f2')
+        .on("mousemove", function (e, d) {
+          // console.clear()
+          // console.log("X: " + (e.pageX - margin.left))
+          // console.log("Y: " + (e.pageY - margin.top))
+
+        });
+    // svg.append('line')
+    //     .attr('x1', 0)
+    //     .attr('y1', 0)
+    //     .attr('x2', width)
+    //     .attr('y2', 0)
+    //     .attr('stroke', 'black')
+    // svg.append('line')
+    //     .attr('x1', 0)
+    //     .attr('y1', 0)
+    //     .attr('x2', 0)
+    //     .attr('y2', height)
+    //     .attr('stroke', 'black')
+
+    d3.csv("http://localhost:5000/charge/project/8/capacity").then((data) => {
+      var periods = d3.map(data, d => d.period)
+
+      // Filter datas to only keep non zero categori/s
+      //
+      // 1- Get the charge sum for each categories over periods
+      // That will leave '0' to categories with no charge at all
+      //
+      var categories_total_charge = {}
+      data.forEach(function (d) {
+        Object.keys(d).forEach(function (k) {
+              if (categories_total_charge.hasOwnProperty(k)) {
+                categories_total_charge[k] += +d[k]
+              } else {
+                categories_total_charge[k] = 0
+              }
+            }
+        )
+      })
+
+      // 2- Now, filter only categories that have a non-zero charge
+      //
+      var categories = []
+      for (var key in categories_total_charge) {
+        if (categories_total_charge[key] > 0) {
+          categories.push(key)
+        }
+      }
+
+
+      // Build the total charge by period;
+      // it will be used for the line drawing above bars.
+      //
+      var periods_total_charge = []
+      data.forEach(function (d) {
+        // get the list of values for all columns except the first one which is the period name
+        var period_values = Object.values(d).slice(1)
+        var row = {}
+        row['period'] = d.period
+        row['total'] = d3.sum(period_values)
+        periods_total_charge.push(row)
+      });
+
+      const x = d3.scaleBand()
+          .domain(periods)
+          .range([0, width])
+          .padding(0.1);
+
+
+      const y = d3.scaleLinear()
+          .range([height, 0])
+          .domain([0, 500]);
+
+      // Sur l'axe horizontal, on filtre les dates afficher
+      const xAxis = d3.axisBottom(x)
+      // .tickValues(x.domain().filter(d => (d.includes("06/0") || d.includes("21/0"))));
+
+      const yAxis = d3.axisLeft(y)
+
+      svg.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(xAxis)
+          .selectAll("text")
+          .style("text-anchor", "end")
+          .attr("dx", "-.9em")
+          .attr("dy", ".15em")
+          .attr("transform", "rotate(-65)");
+
+      svg.append("g")
+          .attr("class", "y axis")
+          .call(yAxis)
+          .append("text")
+          .attr("fill", "#000")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 6)
+          .attr("dy", "0.71em")
+          .style("text-anchor", "end")
+          .text("rate");
+
+      svg.append("text")
+          .attr("text-anchor", "end")
+          .attr("transform", "rotate(-90)")
+          .attr("y", -margin.left + 40)
+          .attr("x", -margin.top - 70)
+          .text("Charge (ETP)")
+
+
+      // Another scale for subgroup position?
+      var xCategories = d3.scaleBand()
+          .domain(categories)
+          .range([0, x.bandwidth()])
+          .padding([0.05])
+
+      // Show the bars
+      svg.append("g")
+          .selectAll("g")
+          // Enter in data = loop group per group
+          .data(data)
+          .enter()
+          .append("g")
+          .attr("transform", function (d) {
+            return "translate(" + x(d.period) + ",0)";
+          })
+          .selectAll("rect")
+          .data(function (d) {
+            return categories.map(function (key) {
+              return {key: key, value: d[key]};
+            });
+          })
+          .enter().append("rect")
+          .attr("x", function (d) {
+            return xCategories(d.key);
+          })
+          .attr("y", function (d) {
+            return y(d.value);
+          })
+          .attr("width", xCategories.bandwidth())
+          .attr("height", function (d) {
+            return height - y(d.value);
+          })
+          .attr("fill", function (d) {
+            return color(d.key);
+          });
+
+
+      // console.log(y(0))
+      // console.log(y(40))
+      // console.log(y(130))"
+      //
+      //
+      // let groups = svg.selectAll("g.category")
+      //     .data(stacked_data)
+      //     .enter()
+      //     .append("g")
+      //     .style("fill", (d) => color(d.key));
+      //
+      // let rect = groups.selectAll("rect")
+      //     .data(d => d)
+      //     .enter()
+      //     .append("rect")
+      //     .attr("x", d => x(d.data.period))
+      //     .attr("width", x.bandwidth())
+      //     // .attr("width", 5)
+      //     .attr("y", d => y(d[1]))
+      //     .attr("height", d => height - y(d[1] - d[0]))
+      //     .attr("stroke", "black")
+      //
+    });
+
+
+  </script>
+
+</body>
+</html>
