@@ -116,19 +116,6 @@
       }
 
 
-      // Build the total charge by period;
-      // it will be used for the line drawing above bars.
-      //
-      var periods_total_charge = []
-      data.forEach(function (d) {
-        // get the list of values for all columns except the first one which is the period name
-        var period_values = Object.values(d).slice(1)
-        var row = {}
-        row['period'] = d.period
-        row['total'] = d3.sum(period_values)
-        periods_total_charge.push(row)
-      });
-
       const x = d3.scaleBand()
           .domain(periods)
           .range([0, width])
