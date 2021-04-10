@@ -11,7 +11,7 @@
   </style>
 
 </head>
-<body>
+<body id="body">
 
   <!-- Create a div where the circles will take place -->
   <div id="chart_stacked_bar"></div>
@@ -22,8 +22,9 @@
     var margin = {top: 30, right: 30, bottom: 130, left: 90}
     // var width = document.getElementById("chart_stacked_bar").offsetWidth * 0.95 - margin.left - margin.right,
     //     height = 600 - margin.top - margin.bottom;
-    var width = 1000 - margin.left - margin.right,
-        height = 600 - margin.top - margin.bottom;
+    const main_elt = document.getElementById("body")
+    var width = main_elt.offsetWidth * 0.98 - margin.left - margin.right;
+    var height = 600 - margin.top - margin.bottom;
 
 
     var color = d3.scaleOrdinal()
@@ -48,13 +49,19 @@
         .append('g')
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-    // svg.append('rect')
-    //     .attr('x', 10)
-    //     .attr('y', 10)
-    //     .attr('width', width)
-    //     .attr('height', height)
-    //     .attr('stroke', 'black')
-    //     .attr('fill', '#f2f2f2')
+    svg.append('rect')
+        .attr('x', 0)
+        .attr('y', 0)
+        .attr('width', width)
+        .attr('height', height)
+        .attr('stroke', 'black')
+        .attr('fill', '#f2f2f2')
+        .on("mousemove", function(e,d){
+          console.clear()
+          console.log("X: "+(e.pageX-margin.left))
+          console.log("Y: "+(e.pageY-margin.top))
+
+        });
     // svg.append('line')
     //     .attr('x1', 0)
     //     .attr('y1', 0)
@@ -129,7 +136,7 @@
 
       // console.log(y(0))
       // console.log(y(40))
-      // console.log(y(130))
+      // console.log(y(130))"
 
 
       let groups = svg.selectAll("g.category")
@@ -147,7 +154,7 @@
           // .attr("width", 5)
           .attr("y", d => y(d[1]))
           .attr("height", d => height - y(d[1] - d[0]))
-          .attr("stroke", "black");
+          .attr("stroke", "black")
 
     });
 
