@@ -75,7 +75,7 @@
     //     .attr('y2', height)
     //     .attr('stroke', 'black')
 
-    d3.csv("http://localhost:5000/charge/project/52/capacity").then((data) => {
+    d3.csv("http://localhost:5000/charge/project/8/capacity").then((data) => {
       var services = data.columns.slice(1)
       var periods = d3.map(data, d => d.period)
 
