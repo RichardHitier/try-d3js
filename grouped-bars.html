@@ -86,7 +86,7 @@
     //     .attr('y2', height)
     //     .attr('stroke', 'black')
 
-    d3.csv("http://localhost:5000/charge/project/8/capacity").then((data) => {
+    d3.csv("capacities-8.csv").then((data) => {
       var periods = d3.map(data, d => d.period)
 
       // Filter datas to only keep non zero categori/s
