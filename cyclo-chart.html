@@ -43,7 +43,7 @@
   </style>
 
 </head>
-<body>
+<body id="body">
 
 
   <!-- Create a div where the circles will take place -->
@@ -53,8 +53,9 @@
   <script src="https://d3js.org/d3.v6.min.js"></script>
 
   <script>
-    var margin = {'top': 40, 'right': 10, 'bottom': 140, 'left': 120},
-        width = 1800 - margin.left - margin.right,
+    const main_elt = document.getElementById("body")
+    const margin = {'top': 40, 'right': 10, 'bottom': 140, 'left': 120},
+        width = main_elt.offsetWidth * 0.95 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
     const x = d3.scaleTime()
@@ -123,7 +124,7 @@
           //       .style("top", (e.pageY - 200) + "px");
           // })
           .on("mouseout", function (d) {
-            d3.select(this).attr("class", d=>d.mode);
+            d3.select(this).attr("class", d => d.mode);
             tooltip.transition()
                 .duration(500)
                 .style("opacity", 0);
