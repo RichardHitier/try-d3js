@@ -53,13 +53,13 @@
   <script src="https://d3js.org/d3.v6.min.js"></script>
 
   <script>
-    const main_elt = document.getElementById("body")
+    const main_elt = document.getElementById("body");
     const margin = {'top': 40, 'right': 10, 'bottom': 140, 'left': 120},
         width = main_elt.offsetWidth * 0.95 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
     const x = d3.scaleTime()
-        .range([5, 15])
+        .range([0, width])
 
     const y = d3.scaleLinear()
         .range([height, 0])
@@ -84,7 +84,8 @@
         d.distance = +d.distance;
       });
 
-      x.domain(data.map(d => d.date))
+      var dates =data.map(d => d.date)
+      x.domain([d3.min(dates), d3.max(dates)])
       y.domain([0, d3.max(data, d => d.distance)])
 
       svg.append("g")
