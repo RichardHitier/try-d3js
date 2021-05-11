@@ -25,7 +25,6 @@ function build_chart() {
         .style("opacity", 0);
 
     d3.csv("./cyclo.csv").then(data => {
-        console.log(data);
         data.forEach(function (d) {
             d.date = new Date(d.date)
             d.distance = +d.distance;
@@ -34,15 +33,20 @@ function build_chart() {
         var ten_days_millisecs = 1000 * 60 * 60 * 24 * 10
         var dates = data.map(d => d.date)
         var first_date = d3.min(dates)
-        first_date = new Date( first_date.getTime() - ten_days_millisecs)
+        first_date = new Date(first_date.getTime() - ten_days_millisecs)
         var last_date = d3.max(dates)
-        last_date = new Date( last_date.getTime() + ten_days_millisecs)
-        x.domain([first_date, last_date ])
+        last_date = new Date(last_date.getTime() + ten_days_millisecs)
+        x.domain([first_date, last_date])
         y.domain([0, d3.max(data, d => d.distance)])
 
         svg.append("g")
             .attr('transform', 'translate(0,' + height + ')')
-            .call(d3.axisBottom(x).tickSize(5))
+            .call(
+                d3.axisBottom(x)
+                    .ticks(d3.utcWeek)
+                    .tickFormat(d3.timeFormat("%b %d"))
+                    .tickSize(5)
+            )
             .selectAll("text")
             .style("text-anchor", 'end')
             .attr("dx", "-.8em")
