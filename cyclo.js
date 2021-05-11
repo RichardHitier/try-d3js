@@ -31,8 +31,13 @@ function build_chart() {
             d.distance = +d.distance;
         });
 
+        var ten_days_millisecs = 1000 * 60 * 60 * 24 * 10
         var dates = data.map(d => d.date)
-        x.domain([d3.min(dates), d3.max(dates)])
+        var first_date = d3.min(dates)
+        first_date = new Date( first_date.getTime() - ten_days_millisecs)
+        var last_date = d3.max(dates)
+        last_date = new Date( last_date.getTime() + ten_days_millisecs)
+        x.domain([first_date, last_date ])
         y.domain([0, d3.max(data, d => d.distance)])
 
         svg.append("g")
