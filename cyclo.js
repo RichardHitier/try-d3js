@@ -10,6 +10,7 @@ function build_chart() {
     const y = d3.scaleLinear()
         .range([height, 0])
 
+    d3.selectAll('svg').remove();
     var svg = d3.select('#chart_cyclo_bar')
         .append('svg')
         .attr('id', 'svg')

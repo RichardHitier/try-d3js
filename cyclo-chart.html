@@ -55,5 +55,8 @@
 
   <script>
     build_chart();
+    d3.select(window).on("resize", () => {
+      build_chart();
+    });
   </script>
 </body>
