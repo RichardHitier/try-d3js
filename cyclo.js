@@ -56,6 +56,7 @@ function build_chart() {
         svg.append("g")
             .call(d3.axisLeft(y).ticks(1))
 
+        var formatTime = d3.timeFormat("%B %d, %Y");
         svg.selectAll(".bar")
             .data(data)
             .enter().append("rect")
@@ -70,7 +71,7 @@ function build_chart() {
                 tooltip.transition()
                     .duration(200)
                     .style("opacity", .9);
-                tooltip.html("<b>" + d.nom + "</b><br>distance : " + d.distance + " km<br>durée: " + d.temps)
+                tooltip.html("<b>" + d.nom + "</b><br>"+formatTime(d.date)+"<br>distance : " + d.distance + " km<br>durée: " + d.temps)
                     .style("left", (e.pageX + 0) + "px")
                     .style("top", margin.top + "px");
                 // .style("top", (e.pageY - 200) + "px");
