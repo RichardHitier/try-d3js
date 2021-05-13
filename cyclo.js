@@ -1,4 +1,5 @@
 function build_chart() {
+    const y_num_ticks = 10;
     const main_elt = document.getElementById("body");
     const margin = {'top': 40, 'right': 10, 'bottom': 140, 'left': 120},
         width = main_elt.offsetWidth * 0.95 - margin.left - margin.right,
@@ -37,7 +38,7 @@ function build_chart() {
         var last_date = d3.max(dates)
         last_date = new Date(last_date.getTime() + ten_days_millisecs)
         x.domain([first_date, last_date])
-        y.domain([0, d3.max(data, d => d.distance)])
+        y.domain([0, d3.max(data, d => d.distance)+10])
 
         svg.append("g")
             .attr('transform', 'translate(0,' + height + ')')
@@ -54,7 +55,19 @@ function build_chart() {
             .attr("transform", "rotate(-65)");
 
         svg.append("g")
-            .call(d3.axisLeft(y).ticks(1))
+            .call(d3.axisLeft(y).ticks(y_num_ticks))
+
+        svg.selectAll("y axis")
+            .data(y.ticks(y_num_ticks))
+            .enter()
+            .append("line")
+            .attr("class", d => (d == 0 ? "horizontalY0" : "horizontalY"))
+            .attr("x1", 0)
+            .attr("x2", width)
+            .attr("y1", d => y(d))
+            .attr("y2", d => y(d))
+            //.lower();// set it below bars if called after
+
 
         var formatTime = d3.timeFormat("%B %d, %Y");
         svg.selectAll(".bar")
