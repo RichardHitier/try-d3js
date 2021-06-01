@@ -29,6 +29,7 @@ function build_chart() {
         data.forEach(function (d) {
             d.date = new Date(d.date)
             d.distance = +d.distance;
+            d.deniv = +d.deniv;
         });
 
         var ten_days_millisecs = 1000 * 60 * 60 * 24 * 10
@@ -84,7 +85,9 @@ function build_chart() {
                 tooltip.transition()
                     .duration(200)
                     .style("opacity", .9);
-                tooltip.html("<b>" + d.nom + "</b><br>"+formatTime(d.date)+"<br>distance : " + d.distance + " km<br>durée: " + d.temps)
+                tooltip.html("<b>" + d.nom + "</b><br>"+formatTime(d.date)+"<br>distance : " + d.distance + " km<br>" +
+                    "Dénivelé: " + d.deniv+" m<br>"+
+                    "durée: " + d.temps)
                     .style("left", (e.pageX + 0) + "px")
                     .style("top", margin.top + "px");
                 // .style("top", (e.pageY - 200) + "px");
@@ -100,6 +103,23 @@ function build_chart() {
                     .duration(500)
                     .style("opacity", 0);
             });
+
+        let yDeniv = d3.scaleLinear()
+            .domain([0, d3.max(data, d => d.deniv)])
+            .range([height, 0])
+
+        let my_line = d3.line()
+            .x(d => x(d.date))
+            .y(d => yDeniv(d.deniv))
+            .curve(d3.curveBasis)
+        ;
+
+        svg.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "darkolivegreen")
+            .attr("stroke-width", 2)
+            .attr("d", my_line);
     });
 
 }
