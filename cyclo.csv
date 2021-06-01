@@ -1,14 +1,14 @@
 date,nom,distance,temps,deniv,mode
-2020-11-21,Donazac,25,1h10,,velo
-2020-11-22,Loupia-Donazac,28,1h20,,velo
-2020-11-24,StCouat,24,1h02,,velo
-2020-11-28,Donazac-PechSalamou,28,1h22,,velo
-2020-11-29,Loupia-Alaigne,35,1h34,,velo
-2020-12-03,Loupia-Donazac,22,0h58,,velo
-2020-12-17,Loupia-Donazac,20,0h57,,velo
-2020-12-19,Loupia-Alaigne-Bellevèze,35,1h31,,velo
+2020-11-21,Donazac,25,1h10,245,velo
+2020-11-22,Loupia-Donazac,28,1h20,245,velo
+2020-11-24,StCouat,24,1h02,200,velo
+2020-11-28,Donazac-PechSalamou,28,1h22,245,velo
+2020-11-29,Loupia-Alaigne,35,1h34,260,velo
+2020-12-03,Loupia-Donazac,22,0h58,245,velo
+2020-12-17,Loupia-Donazac,20,0h57,245,velo
+2020-12-19,Loupia-Alaigne-Bellevèze,35,1h31,260,velo
 2020-12-26,greffeil,7,2h,,rando
-2020-12-27,LaDigne-StCouat,32,1h27,,velo
+2020-12-27,LaDigne-StCouat,32,1h27,200,velo
 2020-12-29,eau salée,5,1h30,,rando
 2020-12-31,pic de brau,7,2h,,rando
 2021-01-03,saint sernin,4,1h,,rando
@@ -16,33 +16,33 @@ date,nom,distance,temps,deniv,mode
 2021-01-31,4 ritous,13,3h00,100,rando
 2021-02-07,rennes insolite,9,2h30,190,rando
 2021-02-14,camps sur agly,12,3h,540,rando
-2021-02-17,Loupia-Donazac,20,0h57,,velo
+2021-02-17,Loupia-Donazac,20,0h57,245,velo
 2021-02-21,sougraigne salz,13,3h30,550,rando
 2021-02-25,gardie,7,2h,150,rando
 2021-02-27,paulihle,10,2h30,0,rando
-2021-02-28,Loupia-Donazac,20,0h57,,velo
+2021-02-28,Loupia-Donazac,20,0h57,245,velo
 2021-03-07,tour du cardou,8,2h30,0,rando
-2021-03-10,Loupia-Donazac,20,0h55,,velo
-2021-03-12,StPolycarpe-Buc-Ladern,42,2h15,,velo
+2021-03-10,Loupia-Donazac,20,0h55,245,velo
+2021-03-12,StPolycarpe-Buc-Ladern,42,2h15,200,velo
 2021-03-14,lac de barenc,11,3h30,0,rando
-2021-03-17,StPierre-Camon,71,3h27,,velo
-2021-03-24,Villelongue-Castelreng,32,1h29,,velo
-2021-03-27,StPolycarpe-Pieusse,45,1h55,,velo
+2021-03-17,StPierre-Camon,71,3h27,712,velo
+2021-03-24,Villelongue-Castelreng,32,1h29,333,velo
+2021-03-27,StPolycarpe-Pieusse,45,1h55,200,velo
 2021-03-28,Tour du pic d'Estable,13,4h00,,rando
-2021-03-31,Ajac-Alaigne,34,1h29,,velo
-2021-04-03,Bellegarde-Cambieure,49,2h20,,velo
+2021-03-31,Ajac-Alaigne,34,1h29,260,velo
+2021-04-03,Bellegarde-Cambieure,49,2h20,324,velo
 2021-04-04,Grand tour de Bugarrach,13,4h45,,rando
-2021-04-07,Castelreng-Donazac,32,1h31,,velo
-2021-04-11,StSernin-Bellevèze,54,2h34,,velo
-2021-04-14,Dignes-Donazac-Pomas,56,2h40,,velo
-2021-04-17,StHilaire-Malepere-Loupia,60,3h10,,velo
+2021-04-07,Castelreng-Donazac,32,1h31,300,velo
+2021-04-11,StSernin-Bellevèze,54,2h34,476,velo
+2021-04-14,Dignes-Donazac-Pomas,56,2h40,250,velo
+2021-04-17,StHilaire-Malepere-Loupia,60,3h10,742,velo
 2021-04-18,Courtauly,8,1h30,,rando
-2021-04-21,StPierre-StBenoit-Ajac,49,2h22,,velo
+2021-04-21,StPierre-StBenoit-Ajac,49,2h22,501,velo
 2021-05-02,Galamus,13,3,,rando
-2021-05-05,Arques-Missegre,61,2h51,,velo
-2021-05-09,Villebazy-Labastide,58,3h32,,velo
-2021-05-12,Montclar-Bram-Arzens,74,3h23,,velo
-2021-05-15,Caillavel-Escueillens-StPierre,66,3h00,,velo
-2021-05-19,Feste-Puivert-Flote-StPierre,72,3h36,,velo
+2021-05-05,Arques-Missegre,61,2h51,642,velo
+2021-05-09,Villebazy-Labastide,58,3h32,1000,velo
+2021-05-12,Montclar-Bram-Arzens,74,3h23,723,velo
+2021-05-15,Caillavel-Escueillens-StPierre,66,3h00,600,velo
+2021-05-19,Feste-Puivert-Flote-StPierre,72,3h36,600,velo
 2021-05-23,Lac de Barenc,11,2h00,,rando
-2021-05-29,Loupia-Bellegarde-Malvies,44,1h52,,velo
+2021-05-29,Loupia-Bellegarde-Malvies,44,1h52,350,velo
