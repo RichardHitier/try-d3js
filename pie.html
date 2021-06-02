@@ -7,20 +7,17 @@
       background-color: #f2f2f2;
       border: 1pt solid black;
     }
-    path {
-    fill: none;
-    stroke: darkolivegreen;
-    stroke-width: 2;
-    }
+
   </style>
 </head>
 <body>
   <div id="my_pie_chart"/>
   <script src="https://d3js.org/d3.v6.min.js"></script>
   <script>
-    margin = {'left': 10, 'right': 10, 'bottom': 10, 'top': 10};
-    width = 800;
-    height = 200;
+    let margin = {'left': 10, 'right': 10, 'bottom': 10, 'top': 10},
+        width = 800,
+        height = 200,
+        radius = Math.min(height, width) / 2;
 
     let svg = d3.select('#my_pie_chart')
         .append('svg')
@@ -28,34 +25,30 @@
         .attr('width', width + margin.right + margin.left)
         .attr('height', height + margin.top + margin.bottom)
         .append('g')
-        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+        .attr('transform', 'translate(' +  width / 2 + ',' +  height / 2 + ')');
 
-    d3.csv("./cyclo.csv").then(function (data) {
+    let color = d3.scaleOrdinal(['#4daf4a', '#377eb8', '#ff7f00', '#984ea3', '#e41a1c']);
+    let data = [2, 4, 8, 10];
+    let pie = d3.pie();
 
-      data.forEach(function (d) {
-        d.date = new Date(d.date);
-        d.deniv = +d.deniv;
-      });
+    let arc = d3.arc()
+        .innerRadius(radius-50)
+        .outerRadius(radius);
 
-      let xScale = d3.scaleTime()
-          .domain(d3.extent(data, d => d.date))
-          .range([margin.left, width - margin.right]);
+    let arcs = svg.selectAll('arc')
+        .data(pie(data))
+        .enter()
+        .append('g')
+        .attr('class', 'arc');
 
-      let yScale = d3.scaleLinear()
-          .domain([0, d3.max(data, d => d.deniv)])
-          .range([height - margin.bottom, margin.top]);
+    arcs.append('path')
+        .attr('stroke', 'black')
+        .attr('fill',
+            function (d, i) {
+              return color(i);
+            })
+        .attr('d', arc);
 
-      let my_line = d3.line()
-          .x(d => xScale(d.date))
-          .y(d => yScale(d.deniv))
-          .curve(d3.curveBasis)
-      ;
-
-      svg.append("path")
-          .datum(data)
-          .attr("d", my_line);
-
-    });
 
   </script>
 </body>
