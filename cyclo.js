@@ -119,7 +119,7 @@ function build_chart() {
         let my_line = d3.line()
             .x(d => x(d.date))
             .y(d => yDeniv(d.deniv))
-            .curve(d3.curveBasis)
+            .curve(d3.curveMonotoneX)
         ;
 
         svg.append("path")
@@ -128,6 +128,14 @@ function build_chart() {
             .attr("stroke", "darkolivegreen")
             .attr("stroke-width", 2)
             .attr("d", my_line);
+
+        svg.selectAll('.data-circle')
+            .data(dataDeniv)
+            .enter().append('circle')
+            .attr("class", "data-circle")
+            .attr("r", 3)
+            .attr("cx", d => x(d.date))
+            .attr("cy", d => yDeniv(d.deniv));
     });
 
 }
