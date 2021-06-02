@@ -6,13 +6,13 @@ function build_chart() {
         height = 400 - margin.top - margin.bottom;
 
     const x = d3.scaleTime()
-        .range([0, width])
+        .range([0, width]);
 
     const y = d3.scaleLinear()
-        .range([height, 0])
+        .range([height, 0]);
 
     d3.selectAll('svg').remove();
-    var svg = d3.select('#chart_cyclo_bar')
+    let svg = d3.select('#chart_cyclo_bar')
         .append('svg')
         .attr('id', 'svg')
         .attr('width', width + margin.right + margin.left)
@@ -27,19 +27,19 @@ function build_chart() {
 
     d3.csv("./cyclo.csv").then(data => {
         data.forEach(function (d) {
-            d.date = new Date(d.date)
+            d.date = new Date(d.date);
             d.distance = +d.distance;
             d.deniv = +d.deniv;
         });
 
-        var ten_days_millisecs = 1000 * 60 * 60 * 24 * 10
-        var dates = data.map(d => d.date)
-        var first_date = d3.min(dates)
-        first_date = new Date(first_date.getTime() - ten_days_millisecs)
-        var last_date = d3.max(dates)
-        last_date = new Date(last_date.getTime() + ten_days_millisecs)
-        x.domain([first_date, last_date])
-        y.domain([0, d3.max(data, d => d.distance)+10])
+        let ten_days_millisecs = 1000 * 60 * 60 * 24 * 10;
+        let dates = data.map(d => d.date);
+        let first_date = d3.min(dates);
+        first_date = new Date(first_date.getTime() - ten_days_millisecs);
+        let last_date = d3.max(dates);
+        last_date = new Date(last_date.getTime() + ten_days_millisecs);
+        x.domain([first_date, last_date]);
+        y.domain([0, d3.max(data, d => d.distance) + 10]);
 
         svg.append("g")
             .attr('transform', 'translate(0,' + height + ')')
@@ -56,21 +56,21 @@ function build_chart() {
             .attr("transform", "rotate(-65)");
 
         svg.append("g")
-            .call(d3.axisLeft(y).ticks(y_num_ticks))
+            .call(d3.axisLeft(y).ticks(y_num_ticks));
 
         svg.selectAll("y axis")
             .data(y.ticks(y_num_ticks))
             .enter()
             .append("line")
-            .attr("class", d => (d == 0 ? "horizontalY0" : "horizontalY"))
+            .attr("class", d => (d === 0 ? "horizontalY0" : "horizontalY"))
             .attr("x1", 0)
             .attr("x2", width)
             .attr("y1", d => y(d))
-            .attr("y2", d => y(d))
-            //.lower();// set it below bars if called after
+            .attr("y2", d => y(d));
+        //.lower();// set it below bars if called after
 
 
-        var formatTime = d3.timeFormat("%B %d, %Y");
+        let formatTime = d3.timeFormat("%B %d, %Y");
         svg.selectAll(".bar")
             .data(data)
             .enter().append("rect")
@@ -80,15 +80,15 @@ function build_chart() {
             .attr("y", d => y(d.distance))
             .attr("height", d => height - y(d.distance))
             .on("mouseover", function (e, d) {
-                d3.select(this).attr("class", "hover")
+                d3.select(this).attr("class", "hover");
                 tooltip.attr("class", d.mode);
                 tooltip.transition()
                     .duration(200)
                     .style("opacity", .9);
-                tooltip.html("<b>" + d.nom + "</b><br>"+formatTime(d.date)+"<br>distance : " + d.distance + " km<br>" +
-                    "Dénivelé: " + d.deniv+" m<br>"+
+                tooltip.html("<b>" + d.nom + "</b><br>" + formatTime(d.date) + "<br>distance : " + d.distance + " km<br>" +
+                    "Dénivelé: " + d.deniv + " m<br>" +
                     "durée: " + d.temps)
-                    .style("left", (e.pageX + 0) + "px")
+                    .style("left", e.pageX + "px")
                     .style("top", margin.top + "px");
                 // .style("top", (e.pageY - 200) + "px");
             })
@@ -97,7 +97,7 @@ function build_chart() {
             //       .style("left", (e.pageX + 0) + "px")
             //       .style("top", (e.pageY - 200) + "px");
             // })
-            .on("mouseout", function (d) {
+            .on("mouseout", function () {
                 d3.select(this).attr("class", d => d.mode);
                 tooltip.transition()
                     .duration(500)
@@ -106,7 +106,15 @@ function build_chart() {
 
         let yDeniv = d3.scaleLinear()
             .domain([0, d3.max(data, d => d.deniv)])
-            .range([height, 0])
+            .range([height, 0]);
+
+        let dataDeniv = data;
+
+        dataDeniv.forEach(function (item, index, object) {
+            if (item.mode !== 'velo') {
+                object.splice(index, 1);
+            }
+        });
 
         let my_line = d3.line()
             .x(d => x(d.date))
