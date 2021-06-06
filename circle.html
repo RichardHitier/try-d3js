@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    svg {
+      background-color: #f2f2f2;
+      border: 1pt solid black;
+    }
+  </style>
+  <!-- Load d3.js -->
+  <script src="d3.min.js"></script>
+
+</head>
+<body>
+  <button id="remove">DEL</button>
+  <button id="add">ADD</button>
+  <div id="main"></div>
+</body>
+<script>
+  let addSvg = function () {
+
+    let margin = {'left': 10, 'right': 50, 'bottom': 90, 'top': 10},
+        width = 800,
+        height = 800,
+        radius = Math.min(width, height) / 2;
+
+
+    let svg = d3.select('#main').append('svg')
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom);
+    let centered_g = svg.append('g')
+        .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+    centered_g.append('circle')
+        .attr('stroke', 'black')
+        .attr('stroke-width', '1pt')
+        .attr('fill', 'red')
+        .attr('r', radius)
+        .attr('cy', 0)
+        .attr('cx', 0);
+
+  };
+  document.getElementById('remove').onclick = function () {
+    d3.select("#main").selectAll("*").remove();
+  };
+  document.getElementById('add').onclick = function () {
+    addSvg();
+  };
+</script>
+</html>

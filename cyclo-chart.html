@@ -3,6 +3,10 @@
 <head>
   <meta charset="utf-8">
   <style>
+    .data-circle:hover {
+      fill: chartreuse;
+      stroke: black;
+    }
 
     .data-circle {
       fill: darkolivegreen;
@@ -30,7 +34,7 @@
       stroke-width: 1pt;
     }
 
-    rect.hover {
+    rect:hover {
       stroke: black;
       fill: white;
     }
@@ -40,7 +44,6 @@
     }
 
     rect.rando {
-      stroke-width: 0pt;
       stroke: brown;
     }
 
@@ -48,6 +51,7 @@
       padding: 0.5em;
       position: absolute;
       border: solid black 1pt;
+      pointer-events: none;
     }
 
     #tooltip.velo {

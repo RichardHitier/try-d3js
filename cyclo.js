@@ -80,7 +80,7 @@ function build_chart() {
             .attr("y", d => y(d.distance))
             .attr("height", d => height - y(d.distance))
             .on("mouseover", function (e, d) {
-                d3.select(this).attr("class", "hover");
+                // d3.select(this).attr("class", "hover");
                 tooltip.attr("class", d.mode);
                 tooltip.transition()
                     .duration(200)
@@ -113,6 +113,8 @@ function build_chart() {
         dataDeniv.forEach(function (item, index, object) {
             if (item.mode !== 'velo') {
                 object.splice(index, 1);
+            } else {
+                console.log(item, index, object);
             }
         });
 
@@ -135,7 +137,14 @@ function build_chart() {
             .attr("class", "data-circle")
             .attr("r", 3)
             .attr("cx", d => x(d.date))
-            .attr("cy", d => yDeniv(d.deniv));
+            .attr("cy", d => yDeniv(d.deniv))
+            .on("mouseover", function (e, d) {
+                d3.select(this).attr("r", 5);
+            })
+            .on("mouseout", function (e, d) {
+                d3.select(this).attr("r", 3);
+            })
+        ;
     });
 
 }
