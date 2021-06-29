@@ -3,7 +3,8 @@ function build_chart() {
     const main_elt = document.getElementById("body");
     const margin = {'top': 40, 'right': 10, 'bottom': 140, 'left': 120},
         width = main_elt.offsetWidth * 0.95 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+        height = 400 - margin.top - margin.bottom,
+        bar_width = 8;
 
     const x = d3.scaleTime()
         .range([0, width]);
@@ -76,7 +77,7 @@ function build_chart() {
             .enter().append("rect")
             .attr("class", d => d.mode)
             .attr("x", d => x(d.date))
-            .attr("width", 7)
+            .attr("width", bar_width)
             .attr("y", d => y(d.distance))
             .attr("height", d => height - y(d.distance))
             .on("mouseover", function (e, d) {
@@ -116,14 +117,17 @@ function build_chart() {
             .curve(d3.curveMonotoneX)
         ;
 
-        svg.append("path")
+        let deniv_g = svg.append('g')
+            .attr('transform', 'translate('+bar_width/2+',0)');
+
+        deniv_g.append("path")
             .datum(dataDeniv)
             .attr("fill", "none")
             .attr("stroke", "darkolivegreen")
             .attr("stroke-width", 2)
             .attr("d", my_line);
 
-        svg.selectAll('.data-circle')
+        deniv_g.selectAll('.data-circle')
             .data(dataDeniv)
             .enter().append('circle')
             .attr("class", "data-circle")
