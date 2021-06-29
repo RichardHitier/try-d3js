@@ -117,7 +117,7 @@ function build_chart() {
         ;
 
         let deniv_g = svg.append('g')
-            .attr('transform', 'translate('+bar_width/2+',0)');
+            .attr('transform', 'translate(' + bar_width / 2 + ',0)');
 
         deniv_g.append("path")
             .datum(dataDeniv)
@@ -130,14 +130,24 @@ function build_chart() {
             .data(dataDeniv)
             .enter().append('circle')
             .attr("class", "data-circle")
-            .attr("r", 3)
+            .attr("r", 4)
             .attr("cx", d => x(d.date))
             .attr("cy", d => yDeniv(d.deniv))
             .on("mouseover", function (e, d) {
-                d3.select(this).attr("r", 5);
+                d3.select(this).attr("r", 8);
+                tooltip.attr("class", 'deniv');
+                tooltip.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                tooltip.html("Dénivelé: " + d.deniv + " m<br>")
+                    .style("left", e.pageX + "px")
+                    .style("top", (e.pageY-50) + "px");
             })
             .on("mouseout", function (e, d) {
-                d3.select(this).attr("r", 3);
+                d3.select(this).attr("r", 5);
+                tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
             })
         ;
     });
