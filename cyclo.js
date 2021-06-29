@@ -108,15 +108,7 @@ function build_chart() {
             .domain([0, d3.max(data, d => d.deniv)])
             .range([height, 0]);
 
-        let dataDeniv = data;
-
-        dataDeniv.forEach(function (item, index, object) {
-            if (item.mode !== 'velo') {
-                object.splice(index, 1);
-            } else {
-                console.log(item, index, object);
-            }
-        });
+        let dataDeniv = data.filter(item => item.mode === 'velo');
 
         let my_line = d3.line()
             .x(d => x(d.date))
@@ -125,7 +117,7 @@ function build_chart() {
         ;
 
         svg.append("path")
-            .datum(data)
+            .datum(dataDeniv)
             .attr("fill", "none")
             .attr("stroke", "darkolivegreen")
             .attr("stroke-width", 2)
