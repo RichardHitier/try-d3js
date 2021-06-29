@@ -14,14 +14,14 @@
     }
 
     .horizontalY {
-        /*fill : none;*/
-        shape-rendering: crispEdges;
-        stroke: lightgrey;
-        stroke-width: 1px;
+      /*fill : none;*/
+      shape-rendering: crispEdges;
+      stroke: lightgrey;
+      stroke-width: 1px;
     }
 
     .horizontalY0 {
-            stroke-width: 0px;
+      stroke-width: 0px;
     }
 
     svg {
@@ -34,10 +34,10 @@
       stroke-width: 1pt;
     }
 
-    rect:hover {
-      stroke: black;
-      fill: white;
-    }
+    /*rect:hover {*/
+    /*  stroke: black;*/
+    /*  fill: white;*/
+    /*}*/
 
     rect.velo {
       stroke: darkblue;
@@ -52,6 +52,14 @@
       position: absolute;
       border: solid black 1pt;
       pointer-events: none;
+    }
+
+    rect.velo:hover {
+      fill: lightsteelblue;
+    }
+
+    rect.rando:hover {
+      fill: lightpink;
     }
 
     #tooltip.velo {
