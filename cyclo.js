@@ -37,8 +37,7 @@ function build_chart() {
         let dates = data.map(d => d.date);
         let first_date = d3.min(dates);
         first_date = new Date(first_date.getTime() - ten_days_millisecs);
-        let last_date = d3.max(dates);
-        last_date = new Date(last_date.getTime() + ten_days_millisecs);
+        let last_date = Date.now();
         x.domain([first_date, last_date]);
         y.domain([0, d3.max(data, d => d.distance) + 10]);
 
