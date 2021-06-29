@@ -70,6 +70,7 @@ function build_chart() {
         //.lower();// set it below bars if called after
 
 
+        let dateOptions = {weekday: 'short', year: '2-digit', month: 'long', day: 'numeric'};
         let formatTime = d3.timeFormat("%B %d, %Y");
         svg.selectAll(".bar")
             .data(data)
@@ -85,8 +86,9 @@ function build_chart() {
                 tooltip.transition()
                     .duration(200)
                     .style("opacity", .9);
-                tooltip.html("<b>" + d.nom + "</b><br>" + formatTime(d.date) + "<br>distance : " + d.distance + " km<br>" +
-                    "Dénivelé: " + d.deniv + " m<br>" +
+                tooltip.html("<div class='tooltip-date'>" + d.mode + ': ' + d.date.toLocaleDateString('fr-FR', dateOptions) + '</div>' +
+                    "<div class='tooltip-title'>" + d.nom + "</div>" +
+                    "distance : " + d.distance + " km<br>" +
                     "durée: " + d.temps)
                     .style("left", e.pageX + "px")
                     .style("top", margin.top + "px");
@@ -141,7 +143,7 @@ function build_chart() {
                     .style("opacity", .9);
                 tooltip.html("Dénivelé: " + d.deniv + " m<br>")
                     .style("left", e.pageX + "px")
-                    .style("top", (e.pageY-50) + "px");
+                    .style("top", (e.pageY - 50) + "px");
             })
             .on("mouseout", function (e, d) {
                 d3.select(this).attr("r", 5);
