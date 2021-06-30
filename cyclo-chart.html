@@ -2,94 +2,14 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <style>
-    .data-circle:hover {
-      fill: lightgreen;
-      stroke: black;
-    }
-
-    .data-circle {
-      fill: darkolivegreen;
-      /*stroke: white;*/
-    }
-
-    .horizontalY {
-      /*fill : none;*/
-      shape-rendering: crispEdges;
-      stroke: lightgrey;
-      stroke-width: 1px;
-    }
-
-    .horizontalY0 {
-      stroke-width: 0px;
-    }
-
-    svg {
-      background-color: #f2f2f2;
-      border: 1pt solid black;
-    }
-
-    rect {
-      fill: #f2f2f2;
-      stroke-width: 1pt;
-    }
-
-    /*rect:hover {*/
-    /*  stroke: black;*/
-    /*  fill: white;*/
-    /*}*/
-
-    rect.velo {
-      stroke: darkblue;
-    }
-
-    rect.rando {
-      stroke: brown;
-    }
-
-    #tooltip {
-      padding: 0.5em;
-      position: absolute;
-      border: solid black 1pt;
-      pointer-events: none;
-    }
-
-    rect.velo:hover {
-      fill: lightsteelblue;
-    }
-
-    rect.rando:hover {
-      fill: lightpink;
-    }
-
-    #tooltip.velo {
-      background-color: lightsteelblue;
-    }
-
-    #tooltip.rando {
-      background-color: lightpink;
-    }
-
-    #tooltip.deniv {
-      background-color: lightgreen;
-    }
-
-    #tooltip .tooltip-title {
-      margin: 8px 0px;
-      font-weight: bold;
-      text-align: center;
-      text-transform: capitalize;
-    }
-    #tooltip .tooltip-date {
-      text-transform: capitalize;
-      text-align: center;
-    }
-
-  </style>
-
+  <link href="cyclo.css" rel="stylesheet">
 </head>
 <body id="body">
 
+  <div id="title">
+    <h2> Ricardo à vélo</h2>
+    <img id="title-image" src="cyclo-rhi.jpg">
+  </div>
 
   <!-- Create a div where the circles will take place -->
   <div id="chart_cyclo_bar"></div>
@@ -99,9 +19,9 @@
   <script src="cyclo.js"></script>
 
   <script>
-    build_chart();
+    build_chart('chart_cyclo_bar');
     d3.select(window).on("resize", () => {
-      build_chart();
+      build_chart('chart_cyclo_bar');
     });
   </script>
 </body>

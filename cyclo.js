@@ -1,6 +1,6 @@
-function build_chart() {
+function build_chart(container_id) {
     const y_num_ticks = 10;
-    const main_elt = document.getElementById("body");
+    const main_elt = document.getElementById('body');
     const margin = {'top': 40, 'right': 10, 'bottom': 140, 'left': 120},
         width = main_elt.offsetWidth * 0.95 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom,
