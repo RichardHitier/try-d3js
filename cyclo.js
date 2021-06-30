@@ -91,7 +91,7 @@ function build_chart(container_id) {
                     "distance : " + d.distance + " km<br>" +
                     "durée: " + d.temps)
                     .style("left", e.pageX + "px")
-                    .style("top", margin.top + "px");
+                    .style("top", (e.pageY - margin.top-90) + "px");
                 // .style("top", (e.pageY - 200) + "px");
             })
             // .on("mousemove", function (e, d) {
@@ -143,7 +143,7 @@ function build_chart(container_id) {
                     .style("opacity", .9);
                 tooltip.html("Dénivelé: " + d.deniv + " m<br>")
                     .style("left", e.pageX + "px")
-                    .style("top", (e.pageY - 50) + "px");
+                    .style("top", (e.pageY - margin.top) + "px");
             })
             .on("mouseout", function (e, d) {
                 d3.select(this).attr("r", 5);
