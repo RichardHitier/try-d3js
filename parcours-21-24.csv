@@ -1,0 +1,98 @@
+date,nom,distance,temps,deniv,mode
+2020-11-21,Donazac,25,01:10:00,181,velo
+2020-11-22,Loupia-Donazac,28,01:20:00,245,velo
+2020-11-24,StCouat,24,01:02:00,216,velo
+2020-11-28,Donazac-PechSalamou,28,01:22:00,292,velo
+2020-11-29,Loupia-Alaigne,35,01:34:00,293,velo
+2020-12-03,Loupia-Donazac,22,00:58:00,190,velo
+2020-12-17,Loupia-Donazac,20,00:57:00,217,velo
+2020-12-19,Loupia-Alaigne-Bellevèze,35,01:31:00,300,velo
+2020-12-26,greffeil,7,02:00:00,,rando
+2020-12-27,LaDigne-StCouat,32,01:27:00,237,velo
+2020-12-29,eau salée,5,01:30:00,,rando
+2020-12-31,pic de brau,7,02:00:00,,rando
+2021-01-03,saint sernin,4,01:00:00,,rando
+2021-01-30,toureille,5,01:30:00,100,rando
+2021-01-31,4 ritous,13,03:00:00,100,rando
+2021-02-07,rennes insolite,9,02:30:00,190,rando
+2021-02-14,camps sur agly,12,03:00:00,540,rando
+2021-02-17,Loupia-Donazac,20,00:57:00,215,velo
+2021-02-21,sougraigne salz,13,03:30:00,550,rando
+2021-02-25,gardie,7,02:00:00,150,rando
+2021-02-27,paulihle,10,02:30:00,0,rando
+2021-02-28,Loupia-Donazac,20,00:57:00,215,velo
+2021-03-07,tour du cardou,8,02:30:00,0,rando
+2021-03-10,Loupia-Donazac,20,00:55:00,215,velo
+2021-03-12,StPolycarpe-Buc-Ladern,42,02:15:00,325,velo
+2021-03-14,lac de barenc,11,03:30:00,0,rando
+2021-03-17,StPierre-Camon,71,03:27:00,712,velo
+2021-03-24,Villelongue-Castelreng,32,01:29:00,333,velo
+2021-03-27,StPolycarpe-Pieusse,45,01:55:00,415,velo
+2021-03-28,Tour du pic d'Estable,13,04:00:00,,rando
+2021-03-31,Ajac-Alaigne,34,01:29:00,422,velo
+2021-04-03,Bellegarde-Cambieure,49,02:20:00,324,velo
+2021-04-04,Grand tour de Bugarrach,13,04:45:00,,rando
+2021-04-07,Castelreng-Donazac,32,01:31:00,408,velo
+2021-04-11,StSernin-Bellevèze,54,02:34:00,585,velo
+2021-04-14,Dignes-Donazac-Pomas,56,02:40:00,515,velo
+2021-04-17,StHilaire-Malepere-Loupia,60,03:10:00,742,velo
+2021-04-18,Courtauly,8,01:30:00,,rando
+2021-04-21,StPierre-StBenoit-Ajac,49,02:22:00,543,velo
+2021-05-02,Galamus,13,03:00:00,,rando
+2021-05-05,Arques-Missegre,61,02:51:00,642,velo
+2021-05-09,Villebazy-Labastide,58,03:32:00,1000,velo
+2021-05-12,Montclar-Bram-Arzens,74,03:23:00,723,velo
+2021-05-15,Caillavel-Escueillens-StPierre,66,03:00:00,600,velo
+2021-05-19,Feste-Puivert-Flote-StPierre,72,03:36:00,857,velo
+2021-05-23,Lac de Barenc,11,02:00:00,,rando
+2021-05-29,Loupia-Bellegarde-Malvies,44,01:52:00,405,velo
+2021-06-02,Limoux-StJulienBriola,74,03:20:00,664,velo
+2022-11-27,Buc,30,01:30:00,426,velo
+2022-12-04,Coufoulens,36,01:36:00,330,velo
+2022-12-13,StPolycarpe,20,00:59:00,354,velo
+2022-12-16,Brugairolles,22,01:00:00,102,velo
+2022-12-27,Cambieure,28,01:12:00,100,velo
+2023-01-08,StPolycarpe,20,00:53:00,100,velo
+2023-01-10,Col d’al Bosc,13,00:35:00,200,velo
+2023-01-12,Pomas,18,00:45:00,146,velo
+2023-01-14,Vilar,33,01:30:00,350,velo
+2023-01-18,La digne,13,01:00:00,109,velo
+2023-01-22,Festes,31,01:31:00,414,velo
+2023-01-25,Col du Loup,18,00:55:00,306,velo
+2023-01-28,Belgarde,46,02:03:00,417,velo
+2023-02-02,Al Bosc,14,00:40:00,200,velo
+2023-02-05,Greffeil,58,02:57:00,820,velo
+2023-02-14,Al Bosc,10,00:29:00,200,velo
+2023-02-18,Ajac/Villelongue,27,01:18:00,246,velo
+2023-02-21,Bugarach,3.4,01:40:00,523,rando
+2023-03-01,Brugairolles,21.3,00:53:00,100,velo
+2023-03-08,Pomas,20,00:51:00,146,velo
+2023-03-20,StPolycarpe,19,00:47:00,100,velo
+2023-11-11,Brugairolles,16,00:50:00,`,velo
+2023-11-18,St Polycarpe,25,01:15:00,,velo
+2023-11-25,St André,34,01:40:00,,velo
+2023-11-26,St Poly,16,00:50:00,,velo
+2023-12-03,Cavanac,38,01:50:00,,velo
+2023-12-10,Belveze,36,01:45:00,,velo
+2023-12-17,Belgarde,45,02:23:00,,velo
+2023-12-24,Laroques,52,02:35:00,,velo
+2023-12-27,St Polycarpe,17,00:50:00,,velo
+2023-12-30,St Pierre ,53,02:35:00,,velo
+2024-01-01,St Poly + monté,18,01:00:00,,velo
+2024-01-13,St Poly-Pomas,32,01:35:00,,velo
+2024-01-20,Belgarde,45,02:12:00,,velo
+2024-01-24,Pomas,19,00:47:00,,velo
+2024-01-26,Col Paradizo,14,00:40:00,,velo
+2024-01-31,Pech-Alaigne,16,00:50:00,,velo
+2024-02-07,Buc,28,01:20:00,,velo
+2024-02-10,Auriac,44,02:05:00,,velo
+2024-02-13,Castelreng-Bezole,23,01:09:00,,velo
+2024-02-17,StSernin/Belveze,54,02:40:00,600,velo
+2024-02-20,St Poly + monté,24,01:12:00,200,velo
+2024-02-23,Col Pieusse,14,00:41:00,173,velo
+2024-02-25,StPo-Greffeil-Ladern,57,02:38:00,570,velo
+2024-02-26,Brugairolles,21,00:55:00,66,velo
+2024-02-29,StPolyStHilairePomas,32,01:24:00,243,velo
+2024-03-05,StPoly,32,01:15:00,150,velo
+2024-03-08,StSernin,32,01:22:00,350,velo
+2024-03-10,StPierre-Escueillens,54,02:13:00,392,velo
