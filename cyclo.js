@@ -26,7 +26,7 @@ function build_chart(container_id) {
         .attr("id", "tooltip")
         .style("opacity", 0);
 
-    d3.csv("./cyclo.csv").then(data => {
+    d3.csv("./parcours-21-24.csv").then(data => {
         data.forEach(function (d) {
             d.date = new Date(d.date);
             d.distance = +d.distance;
